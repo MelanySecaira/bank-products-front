@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Angular build
+dist/
+.angular/
+
+# Environment files
+src/environments/*.local.ts
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Cache
+.cache/
+
+# Temporary files
+tmp/
+temp/
+
+# Generated files
+*.tmp
+
+# Package lock optional
+# package-lock.json
+
+# Firebase
+.firebase/
+
+# Testing
+karma.conf.js
+
+# Misc
+*.swp
