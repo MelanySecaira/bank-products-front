@@ -1,1 +1,49 @@
-<p>product-list works!</p>
+<div class="header">
+
+  <input
+    type="text"
+    placeholder="Search..."
+    [formControl]="searchControl"
+  />
+
+  <button routerLink="/products/create">
+    Agregar
+  </button>
+
+</div>
+
+<div class="results">
+
+  <span>
+    {{ filteredProducts().length }} Resultados
+  </span>
+
+  <select
+    (change)="changePageSize(+$any($event.target).value)"
+  >
+    <option [value]="5">5</option>
+    <option [value]="10">10</option>
+    <option [value]="20">20</option>
+  </select>
+
+</div>
+
+@if (loading()) {
+
+  <p>Cargando productos...</p>
+
+}
+
+@if (errorMessage()) {
+
+  <p>
+    {{ errorMessage() }}
+  </p>
+
+}
+
+<app-product-table
+  [products]="filteredProducts()"
+  (edit)="goToEdit($event)"
+  (delete)="openDeleteModal($event)"
+></app-product-table>

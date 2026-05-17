@@ -1,1 +1,97 @@
-<p>product-table works!</p>
+@if (products().length === 0) {
+
+  <div class="empty-state">
+
+    <p>No hay productos disponibles</p>
+
+  </div>
+
+} @else {
+
+  <table class="products-table">
+
+    <thead>
+
+      <tr>
+        <th>Logo</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Fecha Liberación</th>
+        <th>Fecha Revisión</th>
+        <th></th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      @for (
+        product of products();
+        track product.id
+      ) {
+
+        <tr>
+
+          <td>
+
+            <img
+              [src]="product.logo"
+              [alt]="product.name"
+              width="40"
+            />
+
+          </td>
+
+          <td>
+            {{ product.name }}
+          </td>
+
+          <td>
+            {{ product.description }}
+          </td>
+
+          <td>
+            {{ product.date_release }}
+          </td>
+
+          <td>
+            {{ product.date_revision }}
+          </td>
+
+          <td>
+
+            <details>
+
+              <summary>
+                ⋮
+              </summary>
+
+              <div class="dropdown-menu">
+
+                <button
+                  type="button"
+                  (click)="onEdit(product.id)"
+                >
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  (click)="onDelete(product.id)"
+                >
+                  Eliminar
+                </button>
+
+              </div>
+
+            </details>
+
+          </td>
+
+        </tr>
+      }
+
+    </tbody>
+
+  </table>
+}
