@@ -1,1 +1,97 @@
-<p>product-form works!</p>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+
+  <div>
+
+    <label>ID</label>
+
+    <input
+      type="text"
+      formControlName="id"
+    />
+
+    @if (
+      form.get('id')?.touched &&
+      form.get('id')?.invalid
+    ) {
+
+      <small>ID inválido</small>
+    }
+
+  </div>
+
+  <div>
+
+    <label>Nombre</label>
+
+    <input
+      type="text"
+      formControlName="name"
+    />
+
+  </div>
+
+  <div>
+
+    <label>Descripción</label>
+
+    <textarea
+      formControlName="description"
+    ></textarea>
+
+  </div>
+
+  <div>
+
+    <label>Logo</label>
+
+    <input
+      type="text"
+      formControlName="logo"
+    />
+
+  </div>
+
+  <div>
+
+    <label>Fecha Liberación</label>
+
+    <input
+      type="date"
+      formControlName="date_release"
+    />
+
+  </div>
+
+  <div>
+
+    <label>Fecha Revisión</label>
+
+    <input
+      type="date"
+      formControlName="date_revision"
+    />
+
+  </div>
+
+  <div>
+
+    <button type="button"
+      (click)="onReset()"
+    >
+      Reiniciar
+    </button>
+
+    <button type="submit">
+      {{
+        mode() === 'create'
+          ? 'Agregar'
+          : 'Guardar'
+      }}
+    </button>
+
+  </div>
+
+</form>

@@ -1,1 +1,23 @@
-<p>product-create works!</p>
+<h1>
+  Agregar Producto
+</h1>
+
+@if (errorMessage()) {
+
+  <p>
+    {{ errorMessage() }}
+  </p>
+}
+
+@if (successMessage()) {
+
+  <p>
+    {{ successMessage() }}
+  </p>
+}
+
+<app-product-form
+  mode="create"
+  (submitForm)="createProduct($event)"
+  (resetForm)="resetForm()"
+></app-product-form>
