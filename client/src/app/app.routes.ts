@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
 
@@ -10,6 +11,7 @@ export const routes: Routes = [
 
   {
     path: 'products',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/products/pages/product-list/product-list')
         .then(m => m.ProductList)
@@ -17,6 +19,7 @@ export const routes: Routes = [
 
   {
     path: 'products/create',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/products/pages/product-create/product-create')
         .then(m => m.ProductCreate)
@@ -24,6 +27,7 @@ export const routes: Routes = [
 
   {
     path: 'products/edit/:id',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/products/pages/product-edit/product-edit')
         .then(m => m.ProductEdit)
