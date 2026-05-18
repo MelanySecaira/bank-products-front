@@ -29,6 +29,7 @@ import { revisionDateValidator }
 from '../../validators/date.validator';
 
 @Component({
+  standalone: true,
   selector: 'app-product-form',
   imports: [
     CommonModule,
@@ -69,12 +70,15 @@ export class ProductForm {
           Validators.maxLength(10)
         ],
 
-        asyncValidators: [
-          idExistsValidator(
-            this.productService
-          )
-        ]
-      }
+        asyncValidators:
+        this.mode() === 'create'
+          ? [
+              idExistsValidator(
+                this.productService
+              )
+            ]
+          : []
+        }
     ],
 
     name: [
@@ -123,6 +127,15 @@ export class ProductForm {
   });
 
   constructor() {
+    if (this.mode() === 'create') {
+
+        this.form.get('id')
+          ?.addAsyncValidators(
+            idExistsValidator(
+              this.productService
+            )
+          );
+      }
 
     effect(() => {
 

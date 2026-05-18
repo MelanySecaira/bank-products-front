@@ -28,17 +28,6 @@ export class ProductService {
       );
   }
 
-  getProductById(id: string): Observable<Product> {
-
-    return this.http
-      .get<ApiResponse<Product>>(
-        `${this.apiUrl}/${id}`
-      )
-      .pipe(
-        map(response => response.data)
-      );
-  }
-
   createProduct(
     product: ProductCreateRequest
   ): Observable<Product> {

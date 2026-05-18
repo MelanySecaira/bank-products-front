@@ -1,1 +1,28 @@
-<p>product-edit works!</p>
+<h1>
+  Editar Producto
+</h1>
+
+@if (loading()) {
+
+  <p>Cargando...</p>
+}
+
+@if (errorMessage()) {
+
+  <p>
+    {{ errorMessage() }}
+  </p>
+}
+
+@if (product()) {
+
+  <app-product-form
+
+    mode="edit"
+
+    [product]="product()"
+
+    (submitForm)="updateProduct($event)"
+
+  ></app-product-form>
+}

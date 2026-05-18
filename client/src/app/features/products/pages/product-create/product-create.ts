@@ -21,6 +21,7 @@ import { ApiError }
 from '../../../../core/models/api-error.model';
 
 @Component({
+  standalone: true,
   selector: 'app-product-create',
   imports: [
     CommonModule,
@@ -48,7 +49,7 @@ export class ProductCreate {
   createProduct(
     product: Product
   ): void {
-    
+
     console.log('Producto a crear:', product);
     this.loading.set(true);
 

@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   inject,
+  output,
   signal
 } from '@angular/core';
 
@@ -20,15 +21,18 @@ import { ProductService } from '../../../../core/services/product';
 import { Product } from '../../models/product.model';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ConfirmModal } from "../../../../shared/components/confirm-modal/confirm-modal";
 
 @Component({
+  standalone: true,
   selector: 'app-product-list',
   imports: [
     CommonModule,
     ReactiveFormsModule,
     ProductTable,
-    RouterLink
-  ],
+    RouterLink,
+    ConfirmModal
+],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -47,6 +51,10 @@ export class ProductList {
   searchControl = new FormControl('');
 
   searchTerm = signal<string>('');
+
+  showDeleteModal =  signal<boolean>(false);
+
+  selectedProduct =  signal<Product | null>(null);
 
   filteredProducts = computed(() => {
     const term = this.searchTerm().toLowerCase();
@@ -105,15 +113,55 @@ export class ProductList {
   }
 
   goToEdit(id: string): void {
-
-  this.router.navigate([
-    '/products/edit',
-    id
-  ]);
+    this.router.navigateByUrl(
+      `/products/edit/${id}`
+    );
 }
 
 openDeleteModal(id: string): void {
 
-  console.log('Eliminar:', id);
+  const product =
+    this.products()
+      .find(
+        product => product.id === id
+      );
+
+  if (!product) return;
+
+  this.selectedProduct.set(product);
+
+  this.showDeleteModal.set(true);
 }
+
+closeDeleteModal(): void {
+
+  this.showDeleteModal.set(false);
+
+  this.selectedProduct.set(null);
+}
+
+deleteProduct(): void {
+
+  const product =
+    this.selectedProduct();
+
+  if (!product) return;
+
+  this.productService
+    .deleteProduct(product.id)
+    .subscribe({
+
+      next: () => {
+
+        this.products.update(products =>
+          products.filter(
+            p => p.id !== product.id
+          )
+        );
+
+        this.closeDeleteModal();
+      }
+    });
+}
+
 }

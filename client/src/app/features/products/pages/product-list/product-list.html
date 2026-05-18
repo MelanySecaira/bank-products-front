@@ -47,3 +47,25 @@
   (edit)="goToEdit($event)"
   (delete)="openDeleteModal($event)"
 ></app-product-table>
+
+@if (showDeleteModal()) {
+
+  <app-confirm-modal
+
+    [title]="'Eliminar producto'"
+
+    [message]="
+      '¿Está seguro de eliminar ' +
+      selectedProduct()?.name +
+      '?'
+    "
+
+    [confirmText]="'Eliminar'"
+
+    [cancelText]="'Cancelar'"
+
+    (confirm)="deleteProduct()"
+    (cancel)="closeDeleteModal()"
+
+  ></app-confirm-modal>
+}

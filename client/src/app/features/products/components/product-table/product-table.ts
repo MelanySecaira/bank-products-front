@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { Product }
 from '../../models/product.model';
 @Component({
+  standalone: true,
   selector: 'app-product-table',
   imports: [
     CommonModule,
