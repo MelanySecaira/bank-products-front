@@ -6,9 +6,6 @@ import {
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-
-import { RouterLink } from '@angular/router';
-
 import { Product }
 from '../../models/product.model';
 @Component({
@@ -16,7 +13,7 @@ from '../../models/product.model';
   selector: 'app-product-table',
   imports: [
     CommonModule,
-    RouterLink
+    
   ],
   templateUrl: './product-table.html',
   styleUrl: './product-table.css',
