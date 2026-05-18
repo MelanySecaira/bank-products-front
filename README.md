@@ -56,14 +56,15 @@ npm test -- --watch=false
 
 Las pruebas usan Vitest junto con el soporte Angular del CLI.
 
-## Construir para producción
+El resultado se genera en `client/dist/`.
+
+## Intalación y levantamiento del Back
 
 ```bash
-cd client
-npm run build
+cd repo-interview-main
+npm i
+npm run start:dev 
 ```
-
-El resultado se genera en `client/dist/`.
 
 ## Cobertura y pruebas relevantes
 
