@@ -38,11 +38,11 @@ cd client
 npm install
 ```
 
-## Ejecutar la aplicación en modo desarrollo
+## Ejecutar la aplicación 
 
 ```bash
 cd client
-npm start
+ng serve
 ```
 
 Luego abre el navegador en `http://localhost:4200/`.
