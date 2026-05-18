@@ -79,12 +79,12 @@
   <div>
 
     <button type="button"
-      (click)="onReset()"
+      (click)="onReset()" class="secondary-button"
     >
       Reiniciar
     </button>
 
-    <button type="submit">
+    <button type="submit" class="primary-button">
       {{
         mode() === 'create'
           ? 'Agregar'

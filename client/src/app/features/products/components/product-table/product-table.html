@@ -8,6 +8,7 @@
 
 } @else {
 
+  <div class="table-container">
   <table class="products-table">
 
     <thead>
@@ -27,7 +28,8 @@
 
       @for (
         product of products();
-        track product.id
+        track product.id;
+        let last = $last
       ) {
 
         <tr>
@@ -60,13 +62,7 @@
 
           <td>
 
-            <details>
-
-              <summary>
-                ⋮
-              </summary>
-
-              <div class="dropdown-menu">
+              <!-- <div class="dropdown-menu">
 
                 <button
                   type="button"
@@ -82,10 +78,43 @@
                   Eliminar
                 </button>
 
-              </div>
+              </div> -->
+              <div class="dropdown" [class.drop-up]="last">
 
-            </details>
+  <button
+    type="button"
+    class="dropdown-trigger"
+  >
+    ⋮
+  </button>
 
+  <div class="dropdown-menu">
+
+    <button
+      type="button"
+      (click)="onEdit(product.id)"
+    >
+
+      <span>✏</span>
+
+      Editar
+
+    </button>
+
+    <button
+      type="button"
+      (click)="onDelete(product.id)"
+    >
+
+      <span>🗑</span>
+
+      Eliminar
+
+    </button>
+
+  </div>
+
+</div>
           </td>
 
         </tr>
@@ -94,4 +123,5 @@
     </tbody>
 
   </table>
+  </div>
 }

@@ -1,4 +1,4 @@
-<div class="header">
+<!-- <div class="header">
 
   <input
     type="text"
@@ -6,25 +6,9 @@
     [formControl]="searchControl"
   />
 
-  <button routerLink="/products/create">
-    Agregar
+  <button routerLink="/products/create" class="primary-button">
+   + Agregar
   </button>
-
-</div>
-
-<div class="results">
-
-  <span>
-    {{ filteredProducts().length }} Resultados
-  </span>
-
-  <select
-    (change)="changePageSize(+$any($event.target).value)"
-  >
-    <option [value]="5">5</option>
-    <option [value]="10">10</option>
-    <option [value]="20">20</option>
-  </select>
 
 </div>
 
@@ -48,6 +32,22 @@
   (delete)="openDeleteModal($event)"
 ></app-product-table>
 
+<div class="results">
+
+  <span>
+    {{ filteredProducts().length }} Resultados
+  </span>
+
+  <select
+    (change)="changePageSize(+$any($event.target).value)"
+  >
+    <option [value]="5">5</option>
+    <option [value]="10">10</option>
+    <option [value]="20">20</option>
+  </select>
+
+</div>
+
 @if (showDeleteModal()) {
 
   <app-confirm-modal
@@ -68,4 +68,96 @@
     (cancel)="closeDeleteModal()"
 
   ></app-confirm-modal>
-}
+} -->
+
+<div class="page-container">
+
+  <h1 class="page-title">
+    BANCO
+  </h1>
+
+  
+
+    <div class="header">
+
+      <input
+        type="text"
+        placeholder="Search..."
+        [formControl]="searchControl"
+      />
+
+      <button
+        routerLink="/products/create"
+        class="primary-button"
+      >
+        Agregar
+      </button>
+
+    </div>
+<div class="content-card">
+    @if (loading()) {
+
+      <p class="info-message">
+        Cargando productos...
+      </p>
+    }
+
+    @if (errorMessage()) {
+
+      <p class="error-message">
+        {{ errorMessage() }}
+      </p>
+    }
+
+    <div class="table-wrapper">
+<app-product-table
+      [products]="filteredProducts()"
+      (edit)="goToEdit($event)"
+      (delete)="openDeleteModal($event)"
+    ></app-product-table>
+    </div>
+    
+
+    <div class="results">
+
+      <span>
+        {{ filteredProducts().length }}
+        Resultados
+      </span>
+
+      <select
+        (change)="changePageSize(+$any($event.target).value)"
+      >
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+      </select>
+
+    </div>
+
+  </div>
+
+  @if (showDeleteModal()) {
+
+    <app-confirm-modal
+
+      [title]="'Eliminar producto'"
+
+      [message]="
+        '¿Está seguro de eliminar ' +
+        selectedProduct()?.name +
+        '?'
+      "
+
+      [confirmText]="'Eliminar'"
+
+      [cancelText]="'Cancelar'"
+
+      (confirm)="deleteProduct()"
+
+      (cancel)="closeDeleteModal()"
+
+    ></app-confirm-modal>
+  }
+
+</div>
