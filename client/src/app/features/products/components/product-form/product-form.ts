@@ -158,6 +158,26 @@ export class ProductForm {
     });
   }
 
+  ngOnInit(): void {
+    
+    this.form.get('date_release')?.valueChanges.subscribe(date => {
+
+      if (!date) return;
+
+      const releaseDate = new Date(date);
+
+      const revisionDate = new Date(releaseDate);
+
+      revisionDate.setFullYear(releaseDate.getFullYear() + 1);
+
+      const formatted = revisionDate.toISOString().split('T')[0];
+
+      this.form.get('date_revision')?.setValue(formatted, {
+        emitEvent: false
+      });
+
+    });
+  }
   onSubmit(): void {
 
     console.log('Form status:', this.form.status);

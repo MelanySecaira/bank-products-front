@@ -1,4 +1,4 @@
-<form
+<!-- <form
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
 >
@@ -85,6 +85,239 @@
     </button>
 
     <button type="submit" class="primary-button">
+      {{
+        mode() === 'create'
+          ? 'Agregar'
+          : 'Guardar'
+      }}
+    </button>
+
+  </div>
+
+</form> -->
+
+
+
+<form 
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="product-form"
+>
+
+  <div class="grid-form">
+
+    <!-- ================= LEFT COLUMN ================= -->
+    <div class="form-column">
+
+      <!-- ID -->
+      <div class="field">
+
+        <label>ID</label>
+
+        <input
+          type="text"
+          formControlName="id"
+          placeholder="ID"
+        />
+
+        @if (form.get('id')?.touched) {
+
+          @if (form.get('id')?.hasError('required')) {
+            <small class="error">
+              El ID es obligatorio
+            </small>
+          }
+
+          @if (form.get('id')?.hasError('minlength')) {
+            <small class="error">
+              El ID debe tener al menos 3 caracteres
+            </small>
+          }
+
+          @if (form.get('id')?.hasError('maxlength')) {
+            <small class="error">
+              El ID no puede superar 10 caracteres
+            </small>
+          }
+
+          @if (form.get('id')?.hasError('idExists')) {
+            <small class="error">
+              El ID ya existe
+            </small>
+          }
+        }
+
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <div class="field">
+
+        <label>Descripción</label>
+
+        <textarea
+          formControlName="description"
+          placeholder="Descripción"
+        ></textarea>
+
+        @if (form.get('description')?.touched) {
+
+          @if (form.get('description')?.hasError('required')) {
+            <small class="error">
+              La descripción es obligatoria
+            </small>
+          }
+
+          @if (form.get('description')?.hasError('minlength')) {
+            <small class="error">
+              Mínimo 10 caracteres
+            </small>
+          }
+
+          @if (form.get('description')?.hasError('maxlength')) {
+            <small class="error">
+              Máximo 200 caracteres
+            </small>
+          }
+        }
+
+      </div>
+
+      <!-- FECHA LIBERACIÓN -->
+      <div class="field">
+
+        <label>Fecha liberación</label>
+
+        <input
+          type="date"
+          formControlName="date_release"
+        />
+
+        @if (form.get('date_release')?.touched) {
+
+          @if (form.get('date_release')?.hasError('required')) {
+            <small class="error">
+              La fecha de liberación es obligatoria
+            </small>
+          }
+
+          @if (form.get('date_release')?.hasError('minTodayDate')) {
+            <small class="error">
+              La fecha no puede ser anterior a hoy
+            </small>
+          }
+        }
+
+      </div>
+
+    </div>
+
+    <!-- ================= RIGHT COLUMN ================= -->
+    <div class="form-column">
+
+      <!-- NOMBRE -->
+      <div class="field">
+
+        <label>Nombre</label>
+
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Nombre"
+        />
+
+        @if (form.get('name')?.touched) {
+
+          @if (form.get('name')?.hasError('required')) {
+            <small class="error">
+              El nombre es obligatorio
+            </small>
+          }
+
+          @if (form.get('name')?.hasError('minlength')) {
+            <small class="error">
+              Mínimo 5 caracteres
+            </small>
+          }
+
+          @if (form.get('name')?.hasError('maxlength')) {
+            <small class="error">
+              Máximo 100 caracteres
+            </small>
+          }
+        }
+
+      </div>
+
+      <!-- LOGO -->
+      <div class="field">
+
+        <label>Logo</label>
+
+        <input
+          type="text"
+          formControlName="logo"
+          placeholder="Logo"
+        />
+
+        @if (form.get('logo')?.touched) {
+
+          @if (form.get('logo')?.hasError('required')) {
+            <small class="error">
+              El logo es obligatorio
+            </small>
+          }
+        }
+
+      </div>
+
+      <!-- FECHA REVISIÓN -->
+      <div class="field">
+
+        <label>Fecha revisión</label>
+
+        <input
+          type="date"
+          formControlName="date_revision"
+          readonly
+        />
+
+        @if (form.get('date_revision')?.touched) {
+
+          @if (form.get('date_revision')?.hasError('required')) {
+            <small class="error">
+              La fecha de revisión es obligatoria
+            </small>
+          }
+
+          @if (form.get('date_revision')?.hasError('notOneYearAfter')) {
+            <small class="error">
+              Debe ser exactamente 1 año después
+            </small>
+          }
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= ACTIONS ================= -->
+  <div class="actions">
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="onReset()"
+    >
+      Reiniciar
+    </button>
+
+    <button
+      type="submit"
+      class="primary-button"
+      [disabled]="form.invalid || form.pending"
+    >
       {{
         mode() === 'create'
           ? 'Agregar'

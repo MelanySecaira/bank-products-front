@@ -1,0 +1,84 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.product-form{
+    border-top: #ccc solid 1px;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+input[readonly] {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+input,
+textarea {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  /* border-color: --color-azul-letra; */
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+button.primary {
+  background-color: var(--color-amarillo-activado);
+  color: var(--color-azul-letra);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background-color: #eaecf2;
+  color: var(--color-azul-letra);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid #e53935;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;              /* quita el borde negro */
+  box-shadow: none;           /* quita glow */
+}
+
