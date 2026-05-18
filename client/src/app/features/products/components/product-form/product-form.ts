@@ -28,6 +28,9 @@ from '../../validators/id.validator';
 import { revisionDateValidator }
 from '../../validators/date.validator';
 
+import { minTodayDateValidator }
+from '../../validators/min-today-date.validator';
+
 @Component({
   standalone: true,
   selector: 'app-product-form',
@@ -109,7 +112,8 @@ export class ProductForm {
     date_release: [
       '',
       [
-        Validators.required
+        Validators.required,
+        minTodayDateValidator()
       ]
     ],
 
@@ -179,11 +183,6 @@ export class ProductForm {
     });
   }
   onSubmit(): void {
-
-    console.log('Form status:', this.form.status);
-    console.log('Form valid:', this.form.valid);
-    console.log('Form pending:', this.form.pending);
-    console.log('Form errors:', this.form.errors);
 
     // Permitir submit si es válido O si está pendiente (validadores async)
     if (this.form.invalid && !this.form.pending) {
